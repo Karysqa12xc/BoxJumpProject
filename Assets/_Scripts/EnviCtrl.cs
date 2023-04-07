@@ -31,15 +31,19 @@ public class EnviCtrl : MonoBehaviour
     }
     GameObject spawnObs(int randomLenght)
     {
-        
+
         //if there is a element in the list has length = rand lenghtobs && it has after of player
         if (SpawnedOBS != null)
         {
             for (int i = 0; i < SpawnedOBS.Count; i++)
             {
-                if (SpawnedOBS[i].lenghtOfOBS == randomLenght && MyGameManager.Instance.player_Input.transform.position.z > MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.transform.position.z + 10)
+                if (SpawnedOBS[i] == null)
                 {
-                    return SpawnedOBS[i].gameObject;
+                    if (SpawnedOBS[i].lenghtOfOBS == randomLenght && MyGameManager.Instance.player_Input.transform.position.z > MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.transform.position.z + 11)
+                    {
+                        return SpawnedOBS[i].gameObject;
+                        
+                    }
                 }
             }
         }
