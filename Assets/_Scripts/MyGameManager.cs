@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MyGameManager : MonoBehaviour
 {
-    #region Get Set
+   
+    
     #region Public Value
     public Player_Input player_Input;
-        
+    public EnviCtrl enviCtrl;
     #endregion
+    #region Get Set
     public float LastSpawnPos { get; set; }
     public static MyGameManager Instance { private set; get; }
     //Game state

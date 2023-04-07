@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player_Input : MonoBehaviour
 {
-    public Rigidbody rb{private set; get;}
+    public Rigidbody rb { private set; get; }
     private float Speed;
     [SerializeField] private float jumpVelocity = 10f, fallSpeed = 2.5f, fallDownSpeed = 150;
 
@@ -33,6 +33,18 @@ public class Player_Input : MonoBehaviour
         transform.Translate(0, 0, Speed * Time.deltaTime);
         //Jump by y
         Jump();
+        //Spawn obs if can
+        if (MyGameManager.Instance.enviCtrl.SpawnedOBS != null)
+        {
+            for (int i = 0; i < MyGameManager.Instance.enviCtrl.SpawnedOBS.Count; i++)
+            {
+                if (transform.position.z > MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.transform.position.z + 11)
+                {
+                    MyGameManager.Instance.enviCtrl.SpawnNextObs();
+                    break;
+                }
+            }
+        }
     }
 
     void Jump()
