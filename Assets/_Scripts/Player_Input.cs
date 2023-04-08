@@ -47,6 +47,10 @@ public class Player_Input : MonoBehaviour
         }
     }
 
+    // void SpawnOBSIfCan()
+    // {
+
+    // }
     void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space))

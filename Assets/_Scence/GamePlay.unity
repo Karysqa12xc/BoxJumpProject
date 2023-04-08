@@ -495,8 +495,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpVelocity: 10
-  fallSpeed: 2.5
-  fallDownSpeed: 150
+  fallSpeed: 2
+  fallDownSpeed: 100
 --- !u!54 &2016117824
 Rigidbody:
   m_ObjectHideFlags: 0

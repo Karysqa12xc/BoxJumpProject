@@ -12,7 +12,7 @@ public class EnviCtrl : MonoBehaviour
     void Start()
     {
         SpawnedOBS = new List<OBS_CTRL>();
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 2; i++)
         {
             SpawnNextObs();
         }
@@ -31,22 +31,16 @@ public class EnviCtrl : MonoBehaviour
     }
     GameObject spawnObs(int randomLenght)
     {
-
-        //if there is a element in the list has length = rand lenghtobs && it has after of player
-        if (SpawnedOBS != null)
+        //if there is a element in the list has length = rand lenghtobs && it has after of playe
+        for (int i = 0; i < SpawnedOBS.Count; i++)
         {
-            for (int i = 0; i < SpawnedOBS.Count; i++)
+            if (SpawnedOBS != null && SpawnedOBS[i].lenghtOfOBS == randomLenght && MyGameManager.Instance.player_Input.transform.position.z > MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.transform.position.z + 11)
             {
-                if (SpawnedOBS[i] == null)
-                {
-                    if (SpawnedOBS[i].lenghtOfOBS == randomLenght && MyGameManager.Instance.player_Input.transform.position.z > MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.transform.position.z + 11)
-                    {
-                        return SpawnedOBS[i].gameObject;
-                        
-                    }
-                }
+                return SpawnedOBS[i].gameObject;
             }
+
         }
+
         //if not
         GameObject groundObj = Instantiate(obs_prefabs, obs_parent, false);
         groundObj.transform.localScale = new Vector3(groundObj.transform.localScale.x, groundObj.transform.localScale.y, randomLenght);
