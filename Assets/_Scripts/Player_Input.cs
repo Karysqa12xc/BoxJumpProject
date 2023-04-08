@@ -38,8 +38,10 @@ public class Player_Input : MonoBehaviour
         {
             for (int i = 0; i < MyGameManager.Instance.enviCtrl.SpawnedOBS.Count; i++)
             {
-                if (transform.position.z > MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.transform.position.z + 11)
+                if (transform.position.z > MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.transform.position.z + 11 &&
+                MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.activeInHierarchy)
                 {
+                    MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.SetActive(false);
                     MyGameManager.Instance.enviCtrl.SpawnNextObs();
                     break;
                 }

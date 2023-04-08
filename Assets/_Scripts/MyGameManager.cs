@@ -26,14 +26,14 @@ public class MyGameManager : MonoBehaviour
     }
     private void Start() {
         player_Input = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Input>();
-        Invoke("StartGame", 2f);
+        // Invoke("StartGame", 2f);
     }
     // Update is called once per frame
     void Update()
     {
 
     }
-    void StartGame(){
+    public void StartGame(){
         currentGameState = GameState.playing;
     }
     public void Death(){

@@ -12,7 +12,7 @@ public class EnviCtrl : MonoBehaviour
     void Start()
     {
         SpawnedOBS = new List<OBS_CTRL>();
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 5; i++)
         {
             SpawnNextObs();
         }
@@ -20,13 +20,14 @@ public class EnviCtrl : MonoBehaviour
     public void SpawnNextObs()
     {
         //random lengh
-        int rand = UnityEngine.Random.Range(4, 6);
+        int rand = UnityEngine.Random.Range(4, 10);
         //random distance
-        int randDis = UnityEngine.Random.Range(2, Const.MAX_OBS_DIS);
+        int randDis = UnityEngine.Random.Range(1, Const.MAX_OBS_DIS);
         GameObject groundObj = spawnObs(rand);
         groundObj.transform.position = new Vector3(0, -3.9f,
         MyGameManager.Instance.LastSpawnPos + rand
         + randDis);
+        groundObj.SetActive(true);
         MyGameManager.Instance.LastSpawnPos += (rand + randDis);
     }
     GameObject spawnObs(int randomLenght)
@@ -34,7 +35,7 @@ public class EnviCtrl : MonoBehaviour
         //if there is a element in the list has length = rand lenghtobs && it has after of playe
         for (int i = 0; i < SpawnedOBS.Count; i++)
         {
-            if (SpawnedOBS != null && SpawnedOBS[i].lenghtOfOBS == randomLenght && MyGameManager.Instance.player_Input.transform.position.z > MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.transform.position.z + 11)
+            if (SpawnedOBS[i].lenghtOfOBS == randomLenght && !MyGameManager.Instance.enviCtrl.SpawnedOBS[i].gameObject.activeInHierarchy)
             {
                 return SpawnedOBS[i].gameObject;
             }
