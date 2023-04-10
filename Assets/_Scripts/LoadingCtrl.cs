@@ -29,8 +29,8 @@ public class LoadingCtrl : MonoBehaviour
         }
         Scene sceneGamePlay = SceneManager.GetSceneByBuildIndex(1);
         if(sceneGamePlay != null && sceneGamePlay.isLoaded){
-            SceneManager.SetActiveScene(sceneGamePlay);
             gameObject.SetActive(false);
+            SceneManager.SetActiveScene(sceneGamePlay);
         }
     }
 

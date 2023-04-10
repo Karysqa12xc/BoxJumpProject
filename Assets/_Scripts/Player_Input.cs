@@ -72,4 +72,12 @@ public class Player_Input : MonoBehaviour
     }
     bool isGround() => transform.position.y < -0.14;
     bool isDeath() => transform.position.y <= Const.Death_POS_Y;
+
+    private void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.tag == "Ground")
+        {
+            MyGameManager.Instance.playerBeforeDeathPos = other.transform.position;
+        }
+    }
 }

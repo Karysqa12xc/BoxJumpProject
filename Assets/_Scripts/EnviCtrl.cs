@@ -8,13 +8,34 @@ public class EnviCtrl : MonoBehaviour
     [SerializeField] private Transform obs_parent;
     public List<OBS_CTRL> SpawnedOBS { private set; get; }
 
+    public GameObject START_ORI_OBS;
+
     // Start is called before the first frame update
     void Start()
     {
+        SpawnFirstFiveObs();
+    }
+
+    public void SpawnFirstFiveObs()
+    {
         SpawnedOBS = new List<OBS_CTRL>();
-        for (int i = 0; i < 5; i++)
+        if (SpawnedOBS == null)
         {
-            SpawnNextObs();
+            for (int i = 0; i < 5; i++)
+            {
+                SpawnNextObs();
+            }
+        }
+        else
+        {
+            for (int i = 0; i < SpawnedOBS.Count; i++)
+            {
+                SpawnedOBS[i].gameObject.SetActive(true);
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                SpawnNextObs();
+            }
         }
     }
     public void SpawnNextObs()
