@@ -5,10 +5,22 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UICtrl : MonoBehaviour
 {
-    //0: Play game screen, 1: Game over screen, 2: Ingame screen, 4: chooseColor screen, 5: dialog
+    [Header("POPUP In Game")]
+    //0: Play game screen, 1: Game over screen, 2: Ingame screen, 4: chooseColor screen, 5: dialog; 6: Mission
     public GameObject[] popUpGameObject;
-    public Text coolDownText, scoreText, dialogText, noticeContentText;
+    [Header("UI Game Text")]
+    public Text coolDownText, scoreText, dialogText, noticeContentText, gameOverHighScoreTXT, gameOverScoreTXT;
+    [Header("Text mission")]
+    /// <summary>
+    /// Text mission: 
+    /// 0: MissionJumpAmountsInOnJump
+    /// 2: MissionTotalJumpAmounts
+    /// 1: MissionScoreAmountReach
+    /// </summary>
+    public Text[] missionText;
+    [Header("Default Position UI")]
     public Transform popTargetPos;
+    [Header("Skin player and ground")]
     public Material[] mats;
 
     private Action callBackOnBtnOK = null;
@@ -30,6 +42,8 @@ public class UICtrl : MonoBehaviour
 
     public void showGameOverScreen()
     {
+        gameOverScoreTXT.text = "SCORE: " + MyGameManager.Instance.Score.ToString();
+        gameOverHighScoreTXT.text = "HIGH SCORE: " + MyGameManager.Instance.HighScore.ToString();
         popUpGameObject[1].SetActive(true);
     }
     public void ChoosePlayerColor(int type){
@@ -66,7 +80,6 @@ public class UICtrl : MonoBehaviour
             callBackOnBtnOK();
         }
     }
-
     public void ShowNotice(string content){
         noticeContentText.text = content;
         popUpGameObject[5].SetActive(true);
@@ -75,5 +88,8 @@ public class UICtrl : MonoBehaviour
     void _ShowNotice(){
         popUpGameObject[5].SetActive(false);
     }
-
+    public void showMission(){
+        popUpGameObject[6].SetActive(true);
+        popUpGameObject[1].SetActive(false);
+    }
 }

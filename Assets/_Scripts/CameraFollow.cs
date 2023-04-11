@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     [SerializeField]private GameObject target;
     private Vector3 offset;
-    [SerializeField]private float smooothSpeed = .125f;
+    [SerializeField]private float smoothSpeed = .125f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 desirePos = target.transform.position - offset;
-        Vector3 smoothPos = Vector3.Lerp(transform.position, desirePos, smooothSpeed);
+        Vector3 smoothPos = Vector3.Lerp(transform.position, desirePos, smoothSpeed);
         if(target.transform.position.y < 0.78f){ //highest is 4
             smoothPos.y = transform.position.y;
         }   

@@ -47,6 +47,8 @@ public class Player_Input : MonoBehaviour
                 }
             }
         }
+
+        MyGameManager.Instance.UpdateScore((long)transform.position.z + (long)0.95);
     }
 
     // void SpawnOBSIfCan()
@@ -62,6 +64,7 @@ public class Player_Input : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 rb.velocity = Vector3.up * jumpVelocity;
+                MyGameManager.Instance.UpdateJumpMission();
             }
         }
         if (rb.velocity.y < 0)
