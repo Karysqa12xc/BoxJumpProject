@@ -26,7 +26,6 @@ public class Player_Input : MonoBehaviour
         //Player death
         if (isDeath())
         {
-            LogApp.Trace("You are die", DebugColor.red);
             MyGameManager.Instance.Death();
         }
         //Move by z
@@ -61,6 +60,7 @@ public class Player_Input : MonoBehaviour
         {
             if (isGround())
             {
+                MyGameManager.Instance.audioSource[1].PlayOneShot(MyGameManager.Instance.sounds[Random.Range(1,4)]); 
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 rb.velocity = Vector3.up * jumpVelocity;

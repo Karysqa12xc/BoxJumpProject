@@ -8,4 +8,5 @@ public class Const
     public static float LAST_POST_ORIGIN = 1f;
     public static float Death_POS_Y = -5f;
     public static int MAX_OBS_DIS = 2;
+    //Rotation of camera(18,-40,-5)
 }

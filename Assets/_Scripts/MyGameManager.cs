@@ -11,6 +11,14 @@ public class MyGameManager : MonoBehaviour
     public Player_Input player_Input;
     public EnviCtrl enviCtrl;
     public UICtrl uICtrl;
+    /// <summary>
+    /// 0: die[1 -3]: jump
+    /// </summary>
+    public AudioClip[] sounds;
+    /// <summary>
+    /// 0: bg 2: other
+    /// </summary>
+    public AudioSource[] audioSource;
     public Vector3 playerBeforeDeathPos;
     #endregion
     #region Get Set
@@ -49,8 +57,6 @@ public class MyGameManager : MonoBehaviour
         //Set user info
         string userInfo = PlayerPrefs.GetString("user_info", "{\"HighScore\": 0,\"MissionTotalJumpAmounts\": 0,\"MissionJumpAmountsInOnRun\": 0,\"MissionScoreAmountReach\": 0}");
         userInfoPlayer = JsonUtility.FromJson<UserInfo>(userInfo);
-        LogApp.Trace("highscore: " + userInfoPlayer.HighScore + " |MissionTotalJumpAmounts: " + userInfoPlayer.MissionTotalJumpAmounts 
-        +" |MissionJumpAmountsInOnRun: " +  userInfoPlayer.MissionJumpAmountsInOnRun + " |MissionScoreAmountReach: "  + userInfoPlayer.MissionScoreAmountReach, DebugColor.yellow);
     }
     // Update is called once per frame
     void Update()
@@ -64,12 +70,14 @@ public class MyGameManager : MonoBehaviour
         StartCoroutine(coolDownTime(delegate
         {
             uICtrl.scoreText.text = "999";
-            Debug.Log("Start the game. Player cam move after 2s");
             currentGameState = GameState.playing;
         }));
     }
     public void Death()
     {
+        audioSource[0].Stop();
+        audioSource[1].PlayOneShot(sounds[0]);
+
         uICtrl.popUpGameObject[2].SetActive(false);
         currentGameState = GameState.death;
         uICtrl.scoreText.text = "";
@@ -91,6 +99,7 @@ public class MyGameManager : MonoBehaviour
     //22:15
     public void continueGame()
     {
+        audioSource[0].Play();
         uICtrl.popUpGameObject[2].SetActive(true);
         uICtrl.popUpGameObject[1].SetActive(false);
 
@@ -106,6 +115,7 @@ public class MyGameManager : MonoBehaviour
     }
     public void newGame()
     {
+        audioSource[0].Play();
         uICtrl.popUpGameObject[2].SetActive(true);
         LastSpawnPos = Const.LAST_POST_ORIGIN;
         MissionJumpAmountsInOnRun = 0;

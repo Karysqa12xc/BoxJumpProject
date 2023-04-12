@@ -69,7 +69,6 @@ public class EnviCtrl : MonoBehaviour
         OBS_CTRL obs_CTRL = groundObj.GetComponent<OBS_CTRL>();
         obs_CTRL.lenghtOfOBS = randomLenght;
         SpawnedOBS.Add(obs_CTRL);
-        LogApp.Trace("Sqwaned Obs list lenght = " + SpawnedOBS.Count, DebugColor.white);
         return groundObj;
 
 
