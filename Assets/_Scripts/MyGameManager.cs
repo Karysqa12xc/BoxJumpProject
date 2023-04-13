@@ -32,23 +32,30 @@ public class MyGameManager : MonoBehaviour
     public int MissionTotalJumpAmounts { get; set; }
     public int MissionJumpAmountsInOnRun { get; set; }
     public long MissionScoreAmountReach { get; set; }
+    public int NextObsCtrl {get; set;}
     #endregion
 
 
-    #region //PRIVATE TRANSFORM
+    #region //PRIVATE
     private UserInfo userInfoPlayer;
+    
     #endregion
     private void Awake()
     {
+        uICtrl = GetComponent<UICtrl>();
+        player_Input = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Input>();
         Instance = this;
         //Declare some default value
         LastSpawnPos = Const.LAST_POST_ORIGIN; // set the last post to spawn
         currentGameState = GameState.ready;
+
+        NextObsCtrl = UnityEngine.Random.Range(0, uICtrl.mats.Length);
+        player_Input.gameObject.GetComponent<Renderer>().material = uICtrl.mats[UnityEngine.Random.Range(0, uICtrl.mats.Length)];
+        uICtrl.effectPlayer.GetComponent<Renderer>().material = uICtrl.mats[UnityEngine.Random.Range(0, uICtrl.mats.Length)];
+        enviCtrl.START_ORI_OBS.gameObject.GetComponent<Renderer>().material = uICtrl.mats[NextObsCtrl];
     }
     private void Start()
     {
-        uICtrl = GetComponent<UICtrl>();
-        player_Input = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Input>();
         // Invoke("Test", 2f);
         // Test();
         uICtrl.missionText[0].text = "Score Amount Reach:" + MissionScoreAmountReach + "/50";

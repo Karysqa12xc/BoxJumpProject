@@ -22,7 +22,7 @@ public class UICtrl : MonoBehaviour
     public Transform popTargetPos;
     [Header("Skin player and ground")]
     public Material[] mats;
-
+    public ParticleSystem effectPlayer;
     private Action callBackOnBtnOK = null;
     // Start is called before the first frame update
     void Start()
@@ -48,6 +48,7 @@ public class UICtrl : MonoBehaviour
     }
     public void ChoosePlayerColor(int type){
         MyGameManager.Instance.player_Input.gameObject.GetComponent<Renderer>().material = mats[type];
+        effectPlayer.GetComponent<Renderer>().material = mats[type];
     }
     public void ChooseroundColor(int type){
         MyGameManager.Instance.enviCtrl.START_ORI_OBS.gameObject.GetComponent<Renderer>().material = mats[type];

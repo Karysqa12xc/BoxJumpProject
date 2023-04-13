@@ -5,12 +5,13 @@ using UnityEngine;
 public class Player_Input : MonoBehaviour
 {
     public Rigidbody rb { private set; get; }
-    private float Speed;
+    [SerializeField] private float Speed, maxSpeed;
     [SerializeField] private float jumpVelocity = 10f, fallSpeed = 2.5f, fallDownSpeed = 150;
-
+    
     private void Awake()
     {
         Speed = Const.ORIGIN_SPEED;
+        maxSpeed = Const.MAX_SPEED;
     }
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,9 @@ public class Player_Input : MonoBehaviour
         {
             MyGameManager.Instance.Death();
         }
-        //Move by z
+        //Move by z and more than speed 
+        if(Speed < maxSpeed) Speed += 0.025f * Time.deltaTime;
+    
         transform.Translate(0, 0, Speed * Time.deltaTime);
         //Jump by y
         Jump();
@@ -56,11 +59,11 @@ public class Player_Input : MonoBehaviour
     // }
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             if (isGround())
             {
-                MyGameManager.Instance.audioSource[1].PlayOneShot(MyGameManager.Instance.sounds[Random.Range(1,4)]); 
+                MyGameManager.Instance.audioSource[1].PlayOneShot(MyGameManager.Instance.sounds[Random.Range(1, 4)]);
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 rb.velocity = Vector3.up * jumpVelocity;
@@ -76,9 +79,9 @@ public class Player_Input : MonoBehaviour
     bool isGround() => transform.position.y < -0.14;
     bool isDeath() => transform.position.y <= Const.Death_POS_Y;
 
-    private void OnCollisionEnter(Collision other) 
+    private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Ground")
         {
             MyGameManager.Instance.playerBeforeDeathPos = other.transform.position;
         }
